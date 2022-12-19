@@ -1,0 +1,104 @@
+type Query
+{
+    getPlots(filter:PlotFilter):PlotResponse
+    getSlots(filter:SlotFilter):SlotResponse
+    getSensors(filter:SensorFilter):SensorResponse
+}
+
+input PlotFilter
+{
+    offset:Int!
+    limit:Int!
+    id:Long
+    language :String
+    keyword:String
+}
+
+input SlotFilter
+{
+    offset:Int!
+    limit:Int!
+    id:Long
+    language :String
+    keyword:String
+}
+
+input SensorFilter
+{
+    offset:Int!
+    limit:Int!
+    id:Long
+    language :String
+    keyword:String
+}
+
+type PlotResponse
+{
+    totalItems:Long
+    totalPages:Int
+    plots:[PlotDTO]
+}
+
+type SlotResponse
+{
+    totalItems:Long
+    totalPages:Int
+    slots:[SlotDTO]
+}
+
+type SensorResponse
+{
+    totalItems:Long
+    totalPages:Int
+    plots:[SensorDTO]
+}
+
+type PlotDTO
+{
+    id: Long
+    name:String
+    nameAr:String
+    nameEn:String
+    slots:[SlotDTO]
+    sensor:SensorDTO
+    createdDate:String
+    modifiedDate:String
+    createdBy:String
+    modifiedBy:String
+}
+
+type SlotDTO
+{
+    id: Long
+    name:String
+    nameAr:String
+    nameEn:String
+    waterRequired:Long
+    startTime:String
+    endTime:String
+    status:Status
+    plot:PlotDTO
+    createdDate:String
+    modifiedDate:String
+    createdBy:String
+    modifiedBy:String
+}
+
+type SensorDTO
+{
+    id: Long
+    name:String
+    nameAr:String
+    nameEn:String
+    url:String
+    plot:PlotDTO
+    createdDate:String
+    modifiedDate:String
+    createdBy:String
+    modifiedBy:String
+}
+
+enum Status{
+    INACTIVE
+    DONE
+}
